@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useProducts from '../hooks/useProducts';
+import { useProducts } from "../hooks/useProducts";
 import { FaStar } from 'react-icons/fa';
 
 const ProductList = () => {

@@ -82,6 +82,19 @@ If you are setting up Tailwind CSS in your own project, you can follow these ste
    npm install -D tailwindcss postcss autoprefixer
 
 
+**Jest Setup:**
+
+This project uses Jest as a testing framework for unit and integration testing. Jest is commonly used with React for testing components and functionality.
+
+Installing Jest:
+To set up Jest in your project, follow these steps:
+
+Install Jest and Babel for Jest:
+
+Run the following command to install Jest along with Babel dependencies:
+
+
+
 ## Acknowledgments
 
 - **React** - For the frontend framework.

@@ -2,15 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchProducts = async () => {
-  const response = await axios.get('http://localhost:3001/products'); // Adjust the API URL as needed
-  return response.data;
+  const response = await axios.get('http://localhost:3001/products');
+  return response.data; // Axios returns the data in the `data` property
 };
 
-const useProducts = () => {
+export const useProducts = () => {
   return useQuery({
-    queryKey: ['products'], // Unique key for caching
-    queryFn: fetchProducts, // Function to fetch data
+    queryKey: ['products'], // Pass the query key as an array
+    queryFn: fetchProducts, // Pass the query function
   });
 };
-
-export default useProducts;
