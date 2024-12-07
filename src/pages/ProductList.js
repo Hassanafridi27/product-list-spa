@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useProducts } from "../hooks/useProducts";
 import { FaStar } from 'react-icons/fa';
 
 const ProductList = () => {
-  const { data: products, isLoading, error } = useProducts();
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [backgroundImage, setBackgroundImage] = useState(
@@ -20,8 +18,72 @@ const ProductList = () => {
     }));
   };
 
-  if (isLoading) return <p className="text-center text-xl">Loading...</p>;
-  if (error) return <p className="text-center text-xl text-red-600">Error fetching products: {error.message}</p>;
+  const products = [
+    {
+      id: 1,
+      name: "Laptop",
+      category: "electronics",
+      price: 899,
+      image: "/images/dell.jpeg",
+      description: "A powerful laptop with great performance."
+    },
+    {
+      id: 2,
+      name: "Dell",
+      category: "electronics",
+      price: 899,
+      image: "/images/product1.jpg",
+      description: "A powerful laptop with great performance."
+    },
+    {
+      id: 3,
+      name: "Smartphone",
+      category: "electronics",
+      price: 699,
+      image: "/images/product2.jpg",
+      description: "A sleek smartphone with excellent camera quality."
+    },
+    {
+      id: 4,
+      name: "Jacket",
+      category: "clothing",
+      price: 120,
+      image: "/images/productt.jpg",
+      description: "A warm and stylish winter jacket."
+    },
+    {
+      id: 5,
+      name: "Sofa",
+      category: "furniture",
+      price: 350,
+      image: "/images/product6.jpg",
+      description: "A comfortable and modern sofa for your living room."
+    },
+    {
+      id: 6,
+      name: "Bookshelf",
+      category: "furniture",
+      price: 150,
+      image: "/images/product9.webp",
+      description: "A stylish bookshelf for organizing your books."
+    },
+    {
+      id: 7,
+      name: "Novel",
+      category: "books",
+      price: 20,
+      image: "/images/product8.jpeg",
+      description: "A gripping novel that you can't put down."
+    },
+    {
+      id: 8,
+      name: "T-shirt",
+      category: "clothing",
+      price: 25,
+      image: "/images/product5.jpg",
+      description: "A comfortable t-shirt for everyday wear."
+    }
+  ];
 
   // Apply category filter and price range filter
   const filteredProducts = (products || [])
@@ -92,7 +154,7 @@ const ProductList = () => {
             {/* Product grid with CSS Grid layout */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {products.map((product) => {
-                const productRating = ratings[product.id] || product.rating; // Use rating from state or default
+                const productRating = ratings[product.id] || 0; // Use rating from state or default
                 return (
                   <div
                     key={product.id}
