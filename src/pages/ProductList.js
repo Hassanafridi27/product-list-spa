@@ -3,6 +3,7 @@ import { FaStar } from 'react-icons/fa';
 
 const ProductList = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState("");
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [backgroundImage, setBackgroundImage] = useState(
     'url("https://images.unsplash.com/photo-1517170037-d46d016e53f9?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjcwMjJ8MHwxfGFsbHwxfHx8fHx8fHwxNjY0NjY2NzA0&ixlib=rb-1.2.1&q=80&w=1080")'
@@ -85,19 +86,19 @@ const ProductList = () => {
     }
   ];
 
-  // Apply category filter and price range filter
   const filteredProducts = (products || [])
-    .filter((product) => categoryFilter === 'all' || product.category === categoryFilter)
-    .filter((product) => product.price >= priceRange[0] && product.price <= priceRange[1]);
+  .filter((product) => categoryFilter === "all" || product.category === categoryFilter)
+  .filter((product) => product.price >= priceRange[0] && product.price <= priceRange[1])
+  .filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  // Group products by category
-  const groupedProducts = filteredProducts.reduce((acc, product) => {
-    if (!acc[product.category]) {
-      acc[product.category] = [];
-    }
-    acc[product.category].push(product);
-    return acc;
-  }, {});
+// Group products by category
+const groupedProducts = filteredProducts.reduce((acc, product) => {
+  if (!acc[product.category]) {
+    acc[product.category] = [];
+  }
+  acc[product.category].push(product);
+  return acc;
+}, {});
 
   return (
     <div
@@ -105,6 +106,7 @@ const ProductList = () => {
       style={{ backgroundImage: backgroundImage }}
     >
       <div className="bg-opacity-60 bg-black p-8 rounded-lg">
+        
         <h1 className="text-4xl font-bold text-center text-white mb-8">Product List</h1>
 
         {/* Filters Section */}
@@ -145,6 +147,17 @@ const ProductList = () => {
             />
             <p className="text-lg text-white">{`$${priceRange[0]} - $${priceRange[1]}`}</p>
           </div>
+
+          <div className="flex items-center space-x-4">
+    <label className="text-lg text-white">Search:</label>
+    <input
+      type="text"
+      placeholder="Search products..."
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+    />
+  </div>
         </div>
 
         {/* Display products by category */}
